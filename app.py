@@ -17,13 +17,14 @@ class Leaderboard(db.Model):
     username = db.Column(db.Text())
     score = db.Column(db.Integer)
 
-    def __init__(self, username):
+    def __init__(self, username, score):
         self.username = username
-        self.score = 0
+        self.score = score
 
 
 @app.route("/")
 def hello():
+    u = Leaderboard("andrew", 1000)
     return render_template('index.html')
 
 
