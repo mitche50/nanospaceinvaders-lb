@@ -48,7 +48,7 @@ def insert_user():
 def update_score():
     request_json = request.get_json()
     try:
-        player = Leaderboard.query.filter_by(username=request_json['player'])
+        player = Leaderboard.query.filter_by(username=request_json['player']).first()
         player.score = request_json['score']
         db.session.commit()
     except Exception as e:
