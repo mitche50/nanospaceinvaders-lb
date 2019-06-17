@@ -1,4 +1,5 @@
 from flask import Flask, render_template, url_for, request
+from flask_socketio import SocketIO
 from flask_sqlalchemy import SQLAlchemy
 import os
 from flask_heroku import Heroku
@@ -7,6 +8,7 @@ DB_URI = os.environ.get('DATABASE_URL')
 ROUTE_KEY = os.environ.get('ROUTE_KEY')
 
 app = Flask(__name__)
+socketio = SocketIO(app)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 heroku = Heroku(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = DB_URI
@@ -27,7 +29,7 @@ db.create_all()
 db.session.commit()
 
 
-@app.route("/")
+@socketio.route("/")
 def index():
     from sqlalchemy import desc
 
@@ -36,7 +38,7 @@ def index():
     return render_template('index.html', leaderboard=leaderboard)
 
 
-@app.route("/{}/add".format(ROUTE_KEY), methods=['POST'])
+@socketio.route("/{}/add".format(ROUTE_KEY), methods=['POST'])
 def insert_user():
     request_json = request.get_json()
     if "player" not in request_json.keys() or "score" not in request_json.keys():
@@ -48,7 +50,7 @@ def insert_user():
         return "user inserted successfully"
 
 
-@app.route("/{}/update".format(ROUTE_KEY), methods=['POST'])
+@socketio.route("/{}/update".format(ROUTE_KEY), methods=['POST'])
 def update_score():
     request_json = request.get_json()
     try:
@@ -60,7 +62,7 @@ def update_score():
     return "Score updated successfully."
 
 
-@app.route("/{}/removeuser".format(ROUTE_KEY), methods=['POST'])
+@socketio.route("/{}/removeuser".format(ROUTE_KEY), methods=['POST'])
 def delete_user():
     request_json = request.get_json()
     if "player" not in request_json.keys():
@@ -73,7 +75,7 @@ def delete_user():
         return "Player {} deleted from database".format(request_json['player'])
 
 
-@app.route("/{}/clear".format(ROUTE_KEY), methods=['POST'])
+@socketio.route("/{}/clear".format(ROUTE_KEY), methods=['POST'])
 def clear_lb():
     leaderboard = Leaderboard.query.all()
     for player in leaderboard:
@@ -83,5 +85,10 @@ def clear_lb():
     return "leaderboard cleared successfully"
 
 
+@socketio.on('lbconnect')
+def handle_connection(json):
+    print('received json: {}'.format(json))
+
+
 if __name__ == "__main__":
-    app.run()
+    socketio.run(app)
