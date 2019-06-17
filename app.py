@@ -56,6 +56,19 @@ def update_score():
     return "Score updated successfully."
 
 
+@app.route("/BODBAJSDOFE48UAB30/delete_user", methods=['POST'])
+def delete_user():
+    request_json = request.get_json()
+    if "player" not in request_json.keys():
+        return "Error, missing player key"
+    else:
+        player = Leaderboard.query.filter_by(username=request_json['player']).first()
+        db.session.delete(player)
+        db.session.commit()
+
+        return "Player {} deleted from database".format(request_json['player'])
+
+
 @app.route("/BODBAJSDOFE48UAB30/clear", methods=['POST'])
 def clear_lb():
     leaderboard = Leaderboard.query.all()
