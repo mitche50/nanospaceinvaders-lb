@@ -29,7 +29,7 @@ db.create_all()
 db.session.commit()
 
 
-@socketio.route("/")
+@app.route("/")
 def index():
     from sqlalchemy import desc
 
@@ -38,7 +38,7 @@ def index():
     return render_template('index.html', leaderboard=leaderboard)
 
 
-@socketio.route("/{}/add".format(ROUTE_KEY), methods=['POST'])
+@app.route("/{}/add".format(ROUTE_KEY), methods=['POST'])
 def insert_user():
     request_json = request.get_json()
     if "player" not in request_json.keys() or "score" not in request_json.keys():
@@ -50,7 +50,7 @@ def insert_user():
         return "user inserted successfully"
 
 
-@socketio.route("/{}/update".format(ROUTE_KEY), methods=['POST'])
+@app.route("/{}/update".format(ROUTE_KEY), methods=['POST'])
 def update_score():
     request_json = request.get_json()
     try:
@@ -62,7 +62,7 @@ def update_score():
     return "Score updated successfully."
 
 
-@socketio.route("/{}/removeuser".format(ROUTE_KEY), methods=['POST'])
+@app.route("/{}/removeuser".format(ROUTE_KEY), methods=['POST'])
 def delete_user():
     request_json = request.get_json()
     if "player" not in request_json.keys():
@@ -75,7 +75,7 @@ def delete_user():
         return "Player {} deleted from database".format(request_json['player'])
 
 
-@socketio.route("/{}/clear".format(ROUTE_KEY), methods=['POST'])
+@app.route("/{}/clear".format(ROUTE_KEY), methods=['POST'])
 def clear_lb():
     leaderboard = Leaderboard.query.all()
     for player in leaderboard:
