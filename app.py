@@ -28,9 +28,9 @@ db.session.commit()
 
 @app.route("/")
 def hello():
-    u = Leaderboard("andrew", 1000)
-    db.session.add(u)
-    db.session.commit()
+    # u = Leaderboard("andrew", 1000)
+    # db.session.add(u)
+    # db.session.commit()
     leaderboard = Leaderboard.query.all()
     return render_template('index.html', leaderboard=leaderboard)
 
