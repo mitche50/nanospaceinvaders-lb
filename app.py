@@ -85,10 +85,10 @@ def clear_lb():
     return "leaderboard cleared successfully"
 
 
-@socketio.on('lbconnect')
-def handle_connection(json):
-    print("user connected.")
-    return "Connected!"
+@socketio.on('message')
+def handle_message(message):
+    print("message received: {}".format(message))
+    return "Message received."
     # print('received json: {}'.format(json))
 
 
