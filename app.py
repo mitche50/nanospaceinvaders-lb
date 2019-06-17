@@ -1,13 +1,15 @@
 from flask import Flask, render_template, url_for, request
 from flask_sqlalchemy import SQLAlchemy
-import sys
-import json
+import os
 from flask_heroku import Heroku
+
+DB_URI = os.environ.get('DATABASE_URL')
+ROUTE_KEY = os.environ.get('ROUTE_KEY')
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 heroku = Heroku(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://uckuuqvvpuravr:8ed73c5895c2e4ad35a443da461605e85233994efc09b37f6abc78cbb7287f17@ec2-54-235-104-136.compute-1.amazonaws.com:5432/daad1ji37o07ln'
+app.config['SQLALCHEMY_DATABASE_URI'] = DB_URI
 db = SQLAlchemy(app)
 
 
@@ -34,7 +36,7 @@ def index():
     return render_template('index.html', leaderboard=leaderboard)
 
 
-@app.route("/BODBAJSDOFE48UAB30/add", methods=['POST'])
+@app.route("/{}/add".format(ROUTE_KEY), methods=['POST'])
 def insert_user():
     request_json = request.get_json()
     if "player" not in request_json.keys() or "score" not in request_json.keys():
@@ -46,7 +48,7 @@ def insert_user():
         return "user inserted successfully"
 
 
-@app.route("/BODBAJSDOFE48UAB30/update", methods=['POST'])
+@app.route("/{}/update".format(ROUTE_KEY), methods=['POST'])
 def update_score():
     request_json = request.get_json()
     try:
@@ -58,7 +60,7 @@ def update_score():
     return "Score updated successfully."
 
 
-@app.route("/BODBAJSDOFE48UAB30/removeuser", methods=['POST'])
+@app.route("/{}/removeuser".format(ROUTE_KEY), methods=['POST'])
 def delete_user():
     request_json = request.get_json()
     if "player" not in request_json.keys():
@@ -71,7 +73,7 @@ def delete_user():
         return "Player {} deleted from database".format(request_json['player'])
 
 
-@app.route("/BODBAJSDOFE48UAB30/clear", methods=['POST'])
+@app.route("/{}/clear".format(ROUTE_KEY), methods=['POST'])
 def clear_lb():
     leaderboard = Leaderboard.query.all()
     for player in leaderboard:

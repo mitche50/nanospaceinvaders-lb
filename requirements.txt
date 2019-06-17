@@ -5,3 +5,4 @@ flask-heroku
 psycopg2
 request
 sqlalchemy
+boto
