@@ -56,7 +56,7 @@ def update_score():
     return "Score updated successfully."
 
 
-@app.route("/BODBAJSDOFE48UAB30/delete_user", methods=['POST'])
+@app.route("/BODBAJSDOFE48UAB30/removeuser", methods=['POST'])
 def delete_user():
     request_json = request.get_json()
     if "player" not in request_json.keys():
