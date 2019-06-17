@@ -44,6 +44,15 @@ def insert_user():
         return "user inserted successfully"
 
 
+@app.route("", methods=['POST'])
+def update_score():
+    request_json = request.get_json()
+    player = Leaderboard.query.filter_by(request_json['player'])
+    player.score = request_json['score']
+    db.session.commit()
+    return "Score updated successfully."
+
+
 @app.route("/BODBAJSDOFE48UAB30/clear", methods=['POST'])
 def clear_lb():
     leaderboard = Leaderboard.query.all()
