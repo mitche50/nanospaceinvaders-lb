@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
 from flask_sqlalchemy import SQLAlchemy
 import sys
 import json
@@ -27,12 +27,20 @@ db.session.commit()
 
 
 @app.route("/")
-def hello():
-    # u = Leaderboard("andrew", 1000)
-    # db.session.add(u)
-    # db.session.commit()
+def index():
     leaderboard = Leaderboard.query.all()
     return render_template('index.html', leaderboard=leaderboard)
+
+
+@app.route("/BODBAJSDOFE48UAB30/add", methods=['POST'])
+def insert_user():
+    request_json = request.get_json()
+    if "player" not in request_json.keys() or "score" not in request_json.keys():
+        return "Error - missing key."
+    else:
+        u = Leaderboard(request_json['player'], request_json['score'])
+        db.session.add(u)
+        db.session.commit()
 
 
 if __name__ == "__main__":
