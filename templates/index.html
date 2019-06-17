@@ -20,7 +20,7 @@
                 </tr>
                 {% for row in leaderboard %}
                 <tr>
-                    <td>test</td>
+                    <td>{{loop.index}}</td>
                     <td>{{row.username}}</td>
                     <td>{{row.score}}</td>
                 </tr>
