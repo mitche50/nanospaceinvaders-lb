@@ -17,7 +17,8 @@ class Leaderboard(db.Model):
     username = db.Column(db.Text())
     score = db.Column(db.Integer)
 
-    def __init__(self, username, score):
+    def __init__(self, id, username, score):
+        self.id = id
         self.username = username
         self.score = score
 
@@ -29,6 +30,7 @@ db.session.commit()
 @app.route("/")
 def index():
     leaderboard = Leaderboard.query.all()
+
     return render_template('index.html', leaderboard=leaderboard)
 
 
@@ -41,6 +43,15 @@ def insert_user():
         u = Leaderboard(request_json['player'], request_json['score'])
         db.session.add(u)
         db.session.commit()
+        return 200
+
+
+@app.route("/BODBAJSDOFE48UAB30/clear", methods=['POST'])
+def clear_lb():
+    leaderboard = Leaderboard.query.all()
+    for player in leaderboard:
+        db.session.delete(player)
+    return 200
 
 
 if __name__ == "__main__":
