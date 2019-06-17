@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, request
-from flask_socketio import SocketIO
+from flask_socketio import SocketIO, emit
 from flask_sqlalchemy import SQLAlchemy
 import os
 from flask_heroku import Heroku
@@ -85,11 +85,9 @@ def clear_lb():
     return "leaderboard cleared successfully"
 
 
-@socketio.on('message')
-def handle_message(message):
-    print("message received: {}".format(message))
-    return "Message received."
-    # print('received json: {}'.format(json))
+@socketio.on('connect')
+def test_connect():
+    emit('my response', {'data': 'Connected'})
 
 
 if __name__ == "__main__":
