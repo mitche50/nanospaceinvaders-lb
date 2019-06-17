@@ -47,7 +47,7 @@ def insert_user():
 @app.route("/BODBAJSDOFE48UAB30/update", methods=['POST'])
 def update_score():
     request_json = request.get_json()
-    player = Leaderboard.query.filter_by(request_json['player'])
+    player = Leaderboard.query.filter_by(username=request_json['player'])
     player.score = request_json['score']
     db.session.commit()
     return "Score updated successfully."
