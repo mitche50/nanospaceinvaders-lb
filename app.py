@@ -87,7 +87,9 @@ def clear_lb():
 
 @socketio.on('lbconnect')
 def handle_connection(json):
-    print('received json: {}'.format(json))
+    print("user connected.")
+    return "Connected!"
+    # print('received json: {}'.format(json))
 
 
 if __name__ == "__main__":
