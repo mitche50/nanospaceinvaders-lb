@@ -29,7 +29,7 @@ db.session.commit()
 def index():
     from sqlalchemy import desc
 
-    leaderboard = Leaderboard.query.all().order_by(desc(Leaderboard.score))
+    leaderboard = Leaderboard.query.order_by(desc(Leaderboard.score))
 
     return render_template('index.html', leaderboard=leaderboard)
 
