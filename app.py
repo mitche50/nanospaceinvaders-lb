@@ -27,7 +27,9 @@ db.session.commit()
 
 @app.route("/")
 def index():
-    leaderboard = Leaderboard.query.all()
+    from sqlalchemy import desc
+
+    leaderboard = Leaderboard.query.all().order_by(desc(Leaderboard.score))
 
     return render_template('index.html', leaderboard=leaderboard)
 
