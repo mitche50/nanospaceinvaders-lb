@@ -44,7 +44,7 @@ def insert_user():
         return "user inserted successfully"
 
 
-@app.route("", methods=['POST'])
+@app.route("/BODBAJSDOFE48UAB30/add", methods=['POST'])
 def update_score():
     request_json = request.get_json()
     player = Leaderboard.query.filter_by(request_json['player'])
