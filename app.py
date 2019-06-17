@@ -86,8 +86,8 @@ def clear_lb():
 
 
 @socketio.on('connect')
-def test_connect(json):
-    print("connection: {}".format(json))
+def test_connect():
+    print("user connected.")
     emit('my response', {'data': 'Connected'})
 
 
