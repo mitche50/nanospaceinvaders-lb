@@ -2,6 +2,7 @@ gunicorn
 flask
 flask-sqlalchemy
 flask-heroku
+flask-socketio
 psycopg2
 request
 sqlalchemy
