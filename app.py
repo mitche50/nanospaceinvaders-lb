@@ -25,6 +25,8 @@ class Leaderboard(db.Model):
 @app.route("/")
 def hello():
     u = Leaderboard("andrew", 1000)
+    db.session.add(u)
+    db.session.commit()
     return render_template('index.html')
 
 
