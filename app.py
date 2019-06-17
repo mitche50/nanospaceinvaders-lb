@@ -31,7 +31,8 @@ def hello():
     u = Leaderboard("andrew", 1000)
     db.session.add(u)
     db.session.commit()
-    return render_template('index.html')
+    leaderboard = Leaderboard.query.all()
+    return render_template('index.html', leaderboard=leaderboard)
 
 
 if __name__ == "__main__":
