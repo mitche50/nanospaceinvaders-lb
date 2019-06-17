@@ -4,3 +4,4 @@ flask-sqlalchemy
 flask-heroku
 psycopg2
 request
+sqlalchemy
