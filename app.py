@@ -22,6 +22,10 @@ class Leaderboard(db.Model):
         self.score = score
 
 
+db.create_all()
+db.session.commit()
+
+
 @app.route("/")
 def hello():
     u = Leaderboard("andrew", 1000)
