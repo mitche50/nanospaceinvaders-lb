@@ -13,8 +13,7 @@ db = SQLAlchemy(app)
 
 class Leaderboard(db.Model):
     __tablename__ = "leaderboard"
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.Text())
+    username = db.Column(db.Text(), primary_key=True)
     score = db.Column(db.Integer)
 
     def __init__(self, username, score):
