@@ -1,0 +1,63 @@
+body {
+    background: rgb(11,11,14);
+    background: linear-gradient(rgba(11,11,14,1) 0%, rgb(0, 0, 17) 90%);
+    background-attachment: fixed;
+    font-family: 'Helvetica Neue', sans-serif; 
+    height: 100%;
+  }
+
+  h1 { 
+      color: #111; 
+      font-weight: bold; 
+      letter-spacing: -1px; 
+      line-height: 1; 
+      text-align: center; 
+    }
+
+  .leaderboard-background {
+    background: #ffff;
+    position: absolute;
+    top: 5%;
+    bottom: 5%;
+    left: 20%;
+    width: 60%;
+    margin-right: 20%;
+    min-height: 100%;
+  }
+  
+  .leaderboard {
+    width: 75%;
+    top: 50px;
+    max-width: 400px;
+    height: 80%;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 5px, 10px, orange;
+  }
+
+  .leaderboard-title {
+      text-align: center;
+      color: #000000;
+      padding-top: 10px;
+  }
+
+  #lb-table {
+      width: 100%;
+  }
+
+  #lb-table td, #lb-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+  #lb-table tr:nth-child(even){background-color: #f2f2f2;}
+
+  #lb-table tr:hover {background-color: #ddd;}
+
+  #lb-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: rgb(0, 0, 17);
+    color: white;
+  }

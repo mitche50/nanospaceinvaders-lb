@@ -1,0 +1,32 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="leaderboard-background">
+            <h1 class="leaderboard-title">
+                <img src="Space Invaders 5.png">
+                <br><br>
+                Nano Space Invaders
+                <br><br>
+                leaderboard
+            </h1>
+
+        <div class="leaderboard">
+            <table id="lb-table">
+                <tr>
+                    <th>Rank</th>
+                    <th>Player Name</th>
+                    <th>Score</th>
+                </tr>
+                {% for row in leaderboard %}
+                <tr>
+                    <td>{{row[0]}}</td>
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    </div>
+</body>
