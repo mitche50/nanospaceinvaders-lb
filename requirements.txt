@@ -1,2 +1,5 @@
 gunicorn
 flask
+flask-sqlalchemy
+flask-heroku
+psycopg2
