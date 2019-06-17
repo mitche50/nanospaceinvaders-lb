@@ -43,7 +43,7 @@ def insert_user():
         u = Leaderboard(request_json['player'], request_json['score'])
         db.session.add(u)
         db.session.commit()
-        return 200
+        return "user inserted successfully"
 
 
 @app.route("/BODBAJSDOFE48UAB30/clear", methods=['POST'])
@@ -51,7 +51,9 @@ def clear_lb():
     leaderboard = Leaderboard.query.all()
     for player in leaderboard:
         db.session.delete(player)
-    return 200
+        db.session.commit()
+
+    return "leaderboard cleared successfully"
 
 
 if __name__ == "__main__":
