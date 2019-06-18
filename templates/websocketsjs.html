@@ -57,14 +57,16 @@
             th3.appendChild(document.createTextNode("Score"));
             tr.appendChild(th3);
 
+            var index = 0;
+
             for(i in leaderboard){
                 let tr = document.createElement('TR');
                 table.appendChild(tr);
                 let td1 = document.createElement('TD');
                 let td2 = document.createElement('TD');
                 let td3 = document.createElement('TD');
-                let rank = int(i) + 1;
-                td1.appendChild(document.createTextNode(rank));
+                index++;
+                td1.appendChild(document.createTextNode(index));
                 td2.appendChild(document.createTextNode(leaderboard[i][0]));
                 td3.appendChild(document.createTextNode(leaderboard[i][1]));
                 tr.appendChild(td1);
