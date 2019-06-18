@@ -1,8 +1,7 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, request
 from flask_socketio import SocketIO, emit
 from flask_sqlalchemy import SQLAlchemy
 import os
-from flask_heroku import Heroku
 from sqlalchemy import desc
 
 DB_URI = os.environ.get('DATABASE_URL')
@@ -11,7 +10,6 @@ ROUTE_KEY = os.environ.get('ROUTE_KEY')
 app = Flask(__name__)
 socketio = SocketIO(app)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-heroku = Heroku(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = DB_URI
 db = SQLAlchemy(app)
 
@@ -119,4 +117,4 @@ def test_connect():
 
 
 if __name__ == "__main__":
-    socketio.run(app)
+    socketio.run(app, host='0.0.0.0', port=443)
