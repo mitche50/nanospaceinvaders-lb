@@ -1,0 +1,66 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf-8">
+        var socket = io.connect(null, {port: 8000});
+        socket.on('lbconnect', function() {
+            socket.emit('connection', {data: 'I\'m connected!'});
+        });
+
+        function createTable() {
+            var table = document.getElementById("lb-table");
+            while(table.firstChild){
+                table.removeChild(myNode.firstChild);
+            }
+
+            var tr = document.createElement('TR');
+            table.appendChild(tr);
+            var th = document.createElement('TH');
+            th1.appendChild(document.createTextNode("Rank"));
+            tr.appendChild(th1);
+            th2 = document.createElement('TH');
+            th2.appendChild(document.createTextNode("Rank"));
+            tr.appendChild(th2);
+            th3 = document.createElement('TH');
+            th3.appendChild(document.createTextNode("Rank"));
+            tr.appendChild(th3);
+
+            var leaderboard = {{ leaderboard|tojson }};
+
+            console.log(leaderboard);
+        }
+
+    </script>
+</head>
+<body>
+    <div class="leaderboard-background">
+            <h1 class="leaderboard-title">
+                <img src="/static/Space Invaders 5.png">
+                <br><br>
+                Nano Space Invaders
+                <br><br>
+                leaderboard
+            </h1>
+
+        <div class="leaderboard">
+            <table id="lb-table">
+
+            </table>
+<!--            <table id="lb-table">-->
+<!--                <tr>-->
+<!--                    <th>Rank</th>-->
+<!--                    <th>Player Name</th>-->
+<!--                    <th>Score</th>-->
+<!--                </tr>-->
+<!--                {% for row in leaderboard %}-->
+<!--                <tr>-->
+<!--                    <td>{{loop.index}}</td>-->
+<!--                    <td>{{row.username}}</td>-->
+<!--                    <td>{{row.score}}</td>-->
+<!--                </tr>-->
+<!--                {% endfor %}-->
+<!--            </table>-->
+        </div>
+
+    </div>
+</body>

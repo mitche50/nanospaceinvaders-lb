@@ -38,6 +38,15 @@ def index():
     return render_template('index.html', leaderboard=leaderboard)
 
 
+@app.route("/js")
+def index():
+    from sqlalchemy import desc
+
+    leaderboard = Leaderboard.query.order_by(desc(Leaderboard.score))
+
+    return render_template('index.html', leaderboard=leaderboard)
+
+
 @app.route("/{}/add".format(ROUTE_KEY), methods=['POST'])
 def insert_user():
     request_json = request.get_json()
