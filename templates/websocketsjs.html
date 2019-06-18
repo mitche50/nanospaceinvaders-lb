@@ -6,33 +6,6 @@
         socket.on('lbconnect', function() {
             socket.emit('connection', {data: 'I\'m connected!'});
         });
-
-        function createTable() {
-            var table = document.getElementById("lb-table");
-            if (table.hasChildNodes()) {
-                while(table.firstChild){
-                    table.removeChild(myNode.firstChild);
-                }
-            }
-
-            var tr = document.createElement('TR');
-            table.appendChild(tr);
-            var th = document.createElement('TH');
-            th1.appendChild(document.createTextNode("Rank"));
-            tr.appendChild(th1);
-            th2 = document.createElement('TH');
-            th2.appendChild(document.createTextNode("Rank"));
-            tr.appendChild(th2);
-            th3 = document.createElement('TH');
-            th3.appendChild(document.createTextNode("Rank"));
-            tr.appendChild(th3);
-
-            var leaderboard = {{ leaderboard|tojson }};
-
-            console.log(leaderboard);
-        }
-        createTable();
-
     </script>
 </head>
 <body>
@@ -66,4 +39,32 @@
         </div>
 
     </div>
+
+    <script>
+        function createTable() {
+            var table = document.getElementById("lb-table");
+            if (table.hasChildNodes()) {
+                while(table.firstChild){
+                    table.removeChild(myNode.firstChild);
+                }
+            }
+
+            var tr = document.createElement('TR');
+            table.appendChild(tr);
+            var th = document.createElement('TH');
+            th1.appendChild(document.createTextNode("Rank"));
+            tr.appendChild(th1);
+            th2 = document.createElement('TH');
+            th2.appendChild(document.createTextNode("Rank"));
+            tr.appendChild(th2);
+            th3 = document.createElement('TH');
+            th3.appendChild(document.createTextNode("Rank"));
+            tr.appendChild(th3);
+
+            var leaderboard = {{ leaderboard|tojson }};
+
+            console.log(leaderboard);
+        }
+        createTable();
+    </script>
 </body>
