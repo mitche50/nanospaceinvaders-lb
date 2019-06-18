@@ -34,8 +34,12 @@ def index():
     from sqlalchemy import desc
 
     leaderboard = Leaderboard.query.order_by(desc(Leaderboard.score))
+    leaderboard_json = {}
 
-    return render_template('index.html', leaderboard=leaderboard)
+    for user in leaderboard:
+        leaderboard_json[user.username] = user.score
+
+    return render_template('index.html', leaderboard=leaderboard_json)
 
 
 @app.route("/js")
