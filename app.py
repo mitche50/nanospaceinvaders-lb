@@ -3,6 +3,7 @@ from flask_socketio import SocketIO, emit
 from flask_sqlalchemy import SQLAlchemy
 import os
 from flask_heroku import Heroku
+from sqlalchemy import desc
 
 DB_URI = os.environ.get('DATABASE_URL')
 ROUTE_KEY = os.environ.get('ROUTE_KEY')
@@ -40,11 +41,8 @@ def index():
 
 @app.route("/js")
 def wsjs():
-    from sqlalchemy import desc
-
     leaderboard = Leaderboard.query.order_by(desc(Leaderboard.score))
     leaderboard_json = []
-    temp = []
 
     for user in leaderboard:
         temp = [user.username, user.score]
@@ -62,9 +60,15 @@ def insert_user():
         u = Leaderboard(request_json['player'], request_json['score'])
         db.session.add(u)
         db.session.commit()
-        socketio.emit('new_player', {'player': request_json['player'],
-                                     'score': request_json['score']
-                                     })
+
+        leaderboard = Leaderboard.query.order_by(desc(Leaderboard.score))
+        leaderboard_json = []
+
+        for user in leaderboard:
+            temp = [user.username, user.score]
+            leaderboard_json.append(temp)
+
+        socketio.emit('new_player', leaderboard_json)
         return "user inserted successfully"
 
 

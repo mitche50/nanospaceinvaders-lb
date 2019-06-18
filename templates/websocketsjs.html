@@ -69,7 +69,8 @@
                 let td1 = document.createElement('TD');
                 let td2 = document.createElement('TD');
                 let td3 = document.createElement('TD');
-                td1.appendChild(document.createTextNode(i + 1));
+                let rank = i + 1;
+                td1.appendChild(document.createTextNode(rank));
                 td2.appendChild(document.createTextNode(leaderboard[i][0]));
                 td3.appendChild(document.createTextNode(leaderboard[i][1]));
                 tr.appendChild(td1);
