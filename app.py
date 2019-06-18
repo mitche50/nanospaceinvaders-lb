@@ -116,5 +116,11 @@ def test_connect():
     print("user connected.")
 
 
+@socketio.on('send_message')
+def handle_source(json_data):
+    text = json_data['message'].encode('ascii', 'ignore')
+    socketio.emit('echo', {'echo': 'Server Says: '+text})
+
+
 if __name__ == "__main__":
     socketio.run(app, host='0.0.0.0', port=5858)
