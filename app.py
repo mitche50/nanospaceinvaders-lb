@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, Response
 from flask_socketio import SocketIO, emit
 from flask_sqlalchemy import SQLAlchemy
 import os
 from sqlalchemy import desc
+import json
 
 DB_URI = os.environ.get('DATABASE_URL')
 ROUTE_KEY = os.environ.get('ROUTE_KEY')
@@ -112,7 +113,7 @@ def return_lb():
         temp = [user.username, user.score]
         leaderboard_json.append(temp)
 
-    return jsonify(leaderboard_json)
+    return Response(json.dumps(leaderboard_json),  mimetype='application/json')
 
 
 if __name__ == "__main__":
