@@ -1,6 +1,20 @@
 <head>
     <link rel="stylesheet" type="text/css" href="/static/style.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <script>
+        function refreshPage () {
+            var page_y = document.getElementsByTagName("body")[0].scrollTop;
+            window.location.href = window.location.href.split('?')[0] + '?page_y=' + page_y;
+        }
+        window.onload = function () {
+            setTimeout(refreshPage, 35000);
+            if ( window.location.href.indexOf('page_y') != -1 ) {
+                var match = window.location.href.split('?')[1].split("&")[0].split("=");
+                document.getElementsByTagName("body")[0].scrollTop = match[1];
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="leaderboard-background">
@@ -61,22 +75,5 @@
         }
         var leaderboard = {{ leaderboard|tojson }};
         createTable(leaderboard);
-
-        function httpGetAsync(theUrl, callback)
-        {
-            var xmlHttp = new XMLHttpRequest();
-            xmlHttp.onreadystatechange = function() {
-                if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-                    callback(xmlHttp.responseText);
-            }
-            xmlHttp.open("GET", theUrl, true); // true for asynchronous
-            xmlHttp.send(null);
-        }
-
-        setInterval(httpGetAsync('https://nanospaceinvaders.herokuapp.com/NJASIFJGDFO643KJR76574KJ2K7/get_lb', function(response) {
-            console.log("type of response: " + typeof response);
-            console.log("response: " + response);
-            createTable(response);
-        }), 5000);
     </script>
 </body>
