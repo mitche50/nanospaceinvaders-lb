@@ -106,15 +106,13 @@ def clear_lb():
 @app.route("/{}/get_lb".format(ROUTE_KEY), methods=['GET'])
 def return_lb():
     leaderboard = Leaderboard.query.order_by(desc(Leaderboard.score))
-    leaderboard_list = []
+    leaderboard_json = []
 
     for user in leaderboard:
         temp = [user.username, user.score]
-        leaderboard_list.append(temp)
+        leaderboard_json.append(temp)
 
-    leaderboard_json = {'list': leaderboard_list}
-
-    return leaderboard_json
+    return tuple(leaderboard_json)
 
 
 if __name__ == "__main__":
