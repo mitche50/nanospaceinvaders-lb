@@ -47,6 +47,9 @@ def insert_user():
         u = Leaderboard(request_json['player'], request_json['score'])
         db.session.add(u)
         db.session.commit()
+        socketio.emit('new_player', {'player': request_json['player'],
+                                     'score': request_json['score']
+                                     })
         return "user inserted successfully"
 
 
