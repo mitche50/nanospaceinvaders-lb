@@ -39,7 +39,7 @@ def index():
 
 
 @app.route("/js")
-def index():
+def wsjs():
     from sqlalchemy import desc
 
     leaderboard = Leaderboard.query.order_by(desc(Leaderboard.score))
