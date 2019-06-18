@@ -29,22 +29,7 @@
 
         <div class="leaderboard">
             <table id="lb-table">
-
             </table>
-<!--            <table id="lb-table">-->
-<!--                <tr>-->
-<!--                    <th>Rank</th>-->
-<!--                    <th>Player Name</th>-->
-<!--                    <th>Score</th>-->
-<!--                </tr>-->
-<!--                {% for row in leaderboard %}-->
-<!--                <tr>-->
-<!--                    <td>{{loop.index}}</td>-->
-<!--                    <td>{{row.username}}</td>-->
-<!--                    <td>{{row.score}}</td>-->
-<!--                </tr>-->
-<!--                {% endfor %}-->
-<!--            </table>-->
         </div>
 
     </div>
@@ -78,7 +63,7 @@
                 let td1 = document.createElement('TD');
                 let td2 = document.createElement('TD');
                 let td3 = document.createElement('TD');
-                let rank = i + 1;
+                let rank = int(i) + 1;
                 td1.appendChild(document.createTextNode(rank));
                 td2.appendChild(document.createTextNode(leaderboard[i][0]));
                 td3.appendChild(document.createTextNode(leaderboard[i][1]));
