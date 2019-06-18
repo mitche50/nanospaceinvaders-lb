@@ -41,7 +41,7 @@
     </div>
 
     <script>
-        function createTable() {
+        function createTable(leaderboard) {
             var table = document.getElementById("lb-table");
             if (table.hasChildNodes()) {
                 while(table.firstChild){
@@ -63,24 +63,21 @@
             th3.appendChild(document.createTextNode("Score"));
             tr.appendChild(th3);
 
-            var leaderboard = {{ leaderboard|tojson }};
-
             for(i in leaderboard){
                 let tr = document.createElement('TR');
                 table.appendChild(tr);
                 let td1 = document.createElement('TD');
                 let td2 = document.createElement('TD');
                 let td3 = document.createElement('TD');
-                td1.appendChild(document.createTextNode(i));
+                td1.appendChild(document.createTextNode(i + 1));
                 td2.appendChild(document.createTextNode(leaderboard[i][0]));
                 td3.appendChild(document.createTextNode(leaderboard[i][1]));
                 tr.appendChild(td1);
                 tr.appendChild(td2);
                 tr.appendChild(td3);
             }
-
-            console.log(leaderboard);
         }
-        createTable();
+        var leaderboard = {{ leaderboard|tojson }};
+        createTable(leaderboard);
     </script>
 </body>
