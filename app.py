@@ -43,10 +43,14 @@ def wsjs():
     from sqlalchemy import desc
 
     leaderboard = Leaderboard.query.order_by(desc(Leaderboard.score))
-    leaderboard_json = {}
+    leaderboard_json = []
+    temp = []
 
     for user in leaderboard:
-        leaderboard_json[user.username] = user.score
+        temp.clear()
+        temp.append(user.username)
+        temp.append(user.score)
+        leaderboard_json.append(temp)
 
     return render_template('websocketsjs.html', leaderboard=leaderboard_json)
 

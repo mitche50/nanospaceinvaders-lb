@@ -57,13 +57,17 @@
             th1.appendChild(document.createTextNode("Rank"));
             tr.appendChild(th1);
             th2 = document.createElement('TH');
-            th2.appendChild(document.createTextNode("Rank"));
+            th2.appendChild(document.createTextNode("Player"));
             tr.appendChild(th2);
             th3 = document.createElement('TH');
-            th3.appendChild(document.createTextNode("Rank"));
+            th3.appendChild(document.createTextNode("Score"));
             tr.appendChild(th3);
 
             var leaderboard = {{ leaderboard|tojson }};
+
+            for(i in leaderboard){
+                console.log(leaderboard[i]);
+            }
 
             console.log(leaderboard);
         }
