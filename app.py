@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from flask_socketio import SocketIO, emit
 from flask_sqlalchemy import SQLAlchemy
 import os
@@ -112,7 +112,7 @@ def return_lb():
         temp = [user.username, user.score]
         leaderboard_json.append(temp)
 
-    return tuple(leaderboard_json)
+    return jsonify(leaderboard_json)
 
 
 if __name__ == "__main__":
