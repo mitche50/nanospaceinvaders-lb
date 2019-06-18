@@ -107,10 +107,15 @@ def clear_lb():
     return "leaderboard cleared successfully"
 
 
+@socketio.on('my_event')
+def test_connect():
+    print("my_event received.")
+    emit('my_response', {'data': 'Connected'})
+
+
 @socketio.on('connect')
 def test_connect():
     print("user connected.")
-    emit('my response', {'data': 'Connected'})
 
 
 if __name__ == "__main__":
