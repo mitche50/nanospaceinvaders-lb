@@ -2,6 +2,7 @@ gunicorn
 flask
 flask-sqlalchemy
 flask-socketio
+eventlet
 psycopg2
 request
 sqlalchemy
