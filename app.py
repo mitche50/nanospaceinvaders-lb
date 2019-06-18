@@ -34,12 +34,8 @@ def index():
     from sqlalchemy import desc
 
     leaderboard = Leaderboard.query.order_by(desc(Leaderboard.score))
-    leaderboard_json = {}
 
-    for user in leaderboard:
-        leaderboard_json[user.username] = user.score
-
-    return render_template('index.html', leaderboard=leaderboard_json)
+    return render_template('index.html', leaderboard=leaderboard)
 
 
 @app.route("/js")
@@ -47,8 +43,12 @@ def wsjs():
     from sqlalchemy import desc
 
     leaderboard = Leaderboard.query.order_by(desc(Leaderboard.score))
+    leaderboard_json = {}
 
-    return render_template('websocketsjs.html', leaderboard=leaderboard)
+    for user in leaderboard:
+        leaderboard_json[user.username] = user.score
+
+    return render_template('websocketsjs.html', leaderboard=leaderboard_json)
 
 
 @app.route("/{}/add".format(ROUTE_KEY), methods=['POST'])
