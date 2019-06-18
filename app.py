@@ -47,9 +47,7 @@ def wsjs():
     temp = []
 
     for user in leaderboard:
-        temp.clear()
-        temp.append(user.username)
-        temp.append(user.score)
+        temp = [user.username, user.score]
         leaderboard_json.append(temp)
 
     return render_template('websocketsjs.html', leaderboard=leaderboard_json)
