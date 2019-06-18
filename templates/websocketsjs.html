@@ -1,24 +1,6 @@
 <head>
     <link rel="stylesheet" type="text/css" href="/static/style.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
-    <script type="text/javascript" charset="utf-8">
-        var socket = io.connect(
-            'https://' + document.domain + ':5858',
-            {transports: ['websocket']}
-        );
-        socket.on('connect', function() {
-            socket.emit('my_event', {data: 'I\'m connected!'});
-        });
-
-        socket.on('my_response', function(msg) {
-            console.log("response received from server " + msg);
-        });
-
-        socket.on('new_player', function(leaderboard){
-            console.log("new player joined");
-            createTable(leaderboard);
-        });
-    </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 </head>
 <body>
     <div class="leaderboard-background">
@@ -79,5 +61,20 @@
         }
         var leaderboard = {{ leaderboard|tojson }};
         createTable(leaderboard);
+
+        function httpGetAsync(theUrl, callback)
+        {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function() {
+                if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                    callback(xmlHttp.responseText);
+            }
+            xmlHttp.open("GET", theUrl, true); // true for asynchronous
+            xmlHttp.send(null);
+        }
+
+        setInterval(httpGetAsync('https://nanospaceinvaders.herokuapp.com/', function(response) {
+            createTable(response);
+        });, 5000);
     </script>
 </body>

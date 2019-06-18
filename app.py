@@ -30,8 +30,6 @@ db.session.commit()
 
 @app.route("/")
 def index():
-    from sqlalchemy import desc
-
     leaderboard = Leaderboard.query.order_by(desc(Leaderboard.score))
 
     return render_template('index.html', leaderboard=leaderboard)
@@ -105,21 +103,11 @@ def clear_lb():
     return "leaderboard cleared successfully"
 
 
-@socketio.on('my_event')
-def test_connect():
-    print("my_event received.")
-    emit('my_response', {'data': 'Connected'})
+@app.route("/{}/get_lb".format(ROUTE_KEY), methods=['GET'])
+def return_lb():
+    leaderboard = Leaderboard.query.order_by(desc(Leaderboard.score))
 
-
-@socketio.on('connect')
-def test_connect():
-    print("user connected.")
-
-
-@socketio.on('send_message')
-def handle_source(json_data):
-    text = json_data['message'].encode('ascii', 'ignore')
-    socketio.emit('echo', {'echo': 'Server Says: '+text})
+    return leaderboard
 
 
 if __name__ == "__main__":
