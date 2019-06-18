@@ -44,7 +44,7 @@ def index():
 
     leaderboard = Leaderboard.query.order_by(desc(Leaderboard.score))
 
-    return render_template('index.html', leaderboard=leaderboard)
+    return render_template('websocketsjs.html', leaderboard=leaderboard)
 
 
 @app.route("/{}/add".format(ROUTE_KEY), methods=['POST'])
