@@ -9,8 +9,10 @@
 
         function createTable() {
             var table = document.getElementById("lb-table");
-            while(table.firstChild){
-                table.removeChild(myNode.firstChild);
+            if (table.hasChildNodes()) {
+                while(table.firstChild){
+                    table.removeChild(myNode.firstChild);
+                }
             }
 
             var tr = document.createElement('TR');
