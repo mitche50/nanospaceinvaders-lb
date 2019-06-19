@@ -23,7 +23,12 @@ body {
     width: 60%;
     margin-right: 20%;
     min-height: 100%;
+    overflow-y: scroll;
   }
+  ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
   
   .leaderboard {
     width: 75%;
